@@ -1,5 +1,4 @@
-
-### Breakout
+# Breakout
 
 Breakout is a classic 2D game released in 1976 (or 1978) on the Atari 2600 console.
 
@@ -12,6 +11,7 @@ Also, you have a certain number of lives (usually 3), when you fail to catch the
 ## Controls
 
 Space to launch the ball.
+
 AD to move the paddle across the bottom edge.
 
 ## Download
