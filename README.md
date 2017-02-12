@@ -1,6 +1,6 @@
 # Breakout
 
-Breakout is a classic 2D game released in 1976 on the Atari 2600 console.
+Breakout is a classic 2D game released in 1976 (or 1978) on the Atari 2600 console.
 
 ## Game rules
 
@@ -14,4 +14,4 @@ Sorry, binaries for this game is currently unavailable.
 
 ## More about the game
 
-Actually you can find the implement details on the website learnopengl.com/ (in the menu directory In Practice/2D Game). But when I know more and more about game developing, I found that the code on the website is a bit awful. To write better code and speed up the game, I started this project.
+Actually you can find the implement details on the website https://learnopengl.com/ (in the menu directory In Practice/2D Game). But when I know more and more about game developing, I found that the code on the website is a bit awful. To write better code and speed up the game, I started this project.
