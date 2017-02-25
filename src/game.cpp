@@ -3,6 +3,8 @@
 #include <iostream>		// TODO: logging
 #include <cstdlib>		// for exit()
 
+Game * Game::game;
+
 Game::Game() : window(nullptr)
 {
 }
@@ -12,9 +14,20 @@ Game::~Game()
 	glfwTerminate();
 }
 
+ResourceManager & Game::getResources()
+{
+	return resources;
+}
+
+Renderer & Game::getRenderer()
+{
+	return renderer;
+}
+
 void Game::init()
 {
 	using std::exit;
+	game = this;
 
 	if (!glfwInit())
 	{
@@ -33,6 +46,7 @@ void Game::init()
 		std::cout << "Failed to create window using GLFW!\n";
 		exit(1);
 	}
+	glfwMakeContextCurrent(window);
 
 	glewExperimental = GL_TRUE;
 	if (glewInit())
@@ -40,11 +54,15 @@ void Game::init()
 		std::cout << "Failed to init GLEW\n";
 		exit(1);
 	}
+	glGetError();	// After initializing GLEW there may be an error, get rid of it
 
 	glViewport(0, 0, 800, 600);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	resources.loadShader("res/shaders/shader.vert", "res/shaders/shader.frag", "shader");
+	renderer.init();
 }
 
 void Game::run()
@@ -65,6 +83,12 @@ void Game::update()
 {
 }
 
-void Game::render() const
+void Game::render()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+Game & Game::getApp()
+{
+	return *game;
 }

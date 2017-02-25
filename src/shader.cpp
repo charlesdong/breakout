@@ -9,7 +9,21 @@ using std::ostringstream;
 using std::cout;
 using glm::value_ptr;
 
-Shader::Shader(const char * vFile, const char * fFile)
+Shader::Shader()
+{
+}
+
+GLuint Shader::get() const
+{
+	return program;
+}
+
+void Shader::use() const
+{
+	glUseProgram(program);
+}
+
+void Shader::create(const char * vFile, const char * fFile)
 {
 	string vCode, fCode;
 	loadCode(vFile, fFile, vCode, fCode);
@@ -21,19 +35,9 @@ Shader::Shader(const char * vFile, const char * fFile)
 	program = createProgram(vShader, fShader);
 }
 
-Shader::~Shader()
+void Shader::clear() const
 {
 	glDeleteProgram(program);
-}
-
-GLuint Shader::get() const
-{
-	return program;
-}
-
-void Shader::use() const
-{
-	glUseProgram(program);
 }
 
 void Shader::loadCode(const char * vFile, const char * fFile, string & vCode, string & fCode) const
@@ -76,6 +80,7 @@ GLuint Shader::createShader(GLuint type, const char * code) const
 		int length;
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
 		GLchar * infoLog = new GLchar[length + 1];
+		glGetShaderInfoLog(shader, length + 1, nullptr, infoLog);
 		cout << "--------------------------------------------------\n"
 			<< "Shader compilation failed, type: " << type << ", info log:\n"
 			<< infoLog << "\n";
@@ -99,11 +104,15 @@ GLuint Shader::createProgram(GLuint vShader, GLuint fShader) const
 		GLint length;
 		glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &length);
 		GLchar * infoLog = new GLchar[length + 1];
+		glGetProgramInfoLog(prog, length + 1, nullptr, infoLog);
 		cout << "-------------------------------------------------\n"
 			<< "Program linking failed, info log:\n"
 			<< infoLog << "\n";
 		delete infoLog;
 	}
+
+	glDeleteShader(vShader);
+	glDeleteShader(fShader);
 
 	return prog;
 }

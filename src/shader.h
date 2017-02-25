@@ -13,12 +13,13 @@ using std::string;
 class Shader
 {
 public:
-	Shader(const char * vFile, const char * fFile);
-	~Shader();
+	//Shader(const char * vFile, const char * fFile);
+	Shader();
 
 	GLuint get() const;
-
 	void use() const;
+	void create(const char * vFile, const char * fFile);
+	void clear() const;
 
 	void seti(const char * name, int v0) const;
 	void setf(const char * name, float v0) const;

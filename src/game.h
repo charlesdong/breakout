@@ -1,7 +1,9 @@
 #pragma once
 
-#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_NONE	// prevent GLFW from including gl.h
 #include <glfw3.h>
+#include "resource_manager.h"
+#include "renderer.h"
 
 class Game
 {
@@ -15,9 +17,18 @@ public:
 	void init();
 	void run();
 
+	ResourceManager & getResources();
+	Renderer & getRenderer();
+
+	static Game & getApp();
+
 private:
 	void update();
-	void render() const;
+	void render();
 
 	GLFWwindow * window;
+	ResourceManager resources;
+	Renderer renderer;
+
+	static Game * game;
 };
