@@ -3,6 +3,8 @@
 #include <iostream>		// TODO: logging
 #include <cstdlib>		// for exit()
 
+void onKey(GLFWwindow * window, int key, int scancode, int action, int mods);
+
 Game * Game::game;
 
 Game::Game() : window(nullptr)
@@ -51,6 +53,9 @@ void Game::init()
 	}
 	glfwMakeContextCurrent(window);
 
+	// Set callbacks
+	glfwSetKeyCallback(window, onKey);
+
 	// Init GLEW
 	glewExperimental = GL_TRUE;
 	if (glewInit())
@@ -73,6 +78,7 @@ void Game::init()
 	// Init game data
 	renderer.init();
 	level.init();
+	paddle.init();
 }
 
 void Game::run()
@@ -99,11 +105,24 @@ void Game::loadTextures()
 	resources.loadTexture("res/textures/background.png", "background");
 	resources.loadTexture("res/textures/brick_solid.png", "brick_solid");
 	resources.loadTexture("res/textures/brick.png", "brick");
+	resources.loadTexture("res/textures/paddle.png", "paddle");
 }
 
 void Game::update()
 {
+	static float preTime = 0.0f;
+	static float curTime = 0.0f;
+
+	preTime = curTime;
+	curTime = (float)glfwGetTime();
+	float dt = curTime - preTime;
+
 	level.update();
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		paddle.move(dt, -1);
+	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		paddle.move(dt, 1);
 }
 
 void Game::render()
@@ -112,6 +131,7 @@ void Game::render()
 
 	renderBackground();
 	level.render();
+	paddle.render();
 }
 
 void Game::renderBackground()
@@ -125,4 +145,8 @@ void Game::renderBackground()
 Game & Game::getApp()
 {
 	return *game;
+}
+
+void onKey(GLFWwindow * window, int key, int scancode, int action, int mods)
+{
 }

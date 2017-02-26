@@ -40,12 +40,12 @@ void Level::update()
 void Level::render() const
 {
 	int w, h;
+	renderer->setSize(brickSize);
 	for (h = 0; h < height; h++)
 		for (w = 0; w < width; w++)
 		{
 			if (getBrick(w, h) == 0)
 				continue;
-			renderer->setSize(brickSize);
 			renderer->setTexture(getBrick(w, h) != 1 ? "brick" : "brick_solid");
 			renderer->setColor(getColor(getBrick(w, h)));
 			renderer->render(vec2(brickSize.x * w, brickSize.y * h));
@@ -56,8 +56,8 @@ const vec3 & Level::getColor(brick_t id) const
 {
 	static const vec3 colors[6] =
 	{
+		vec3(0.0f, 0.0f, 0.0f),
 		vec3(0.8f, 0.8f, 0.7f),
-		vec3(1.0f, 1.0f, 1.0f),
 		vec3(0.2f, 0.6f, 1.0f),
 		vec3(0.0f, 0.7f, 0.0f),
 		vec3(0.8f, 0.8f, 0.4f),

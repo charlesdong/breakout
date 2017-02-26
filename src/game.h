@@ -2,9 +2,11 @@
 
 #define GLFW_INCLUDE_NONE	// prevent GLFW from including gl.h
 #include <glfw3.h>
+
 #include "resource_manager.h"
 #include "renderer.h"
 #include "level.h"
+#include "paddle.h"
 
 class Game
 {
@@ -34,6 +36,7 @@ private:
 	ResourceManager resources;
 	Renderer renderer;
 	Level level;
+	Paddle paddle;
 
 	static Game * game;
 };
