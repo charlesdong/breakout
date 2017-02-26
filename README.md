@@ -2,6 +2,12 @@
 
 Breakout is a classic 2D game released in 1976 (or 1978) on the Atari 2600 console. And this is a Breakout clone.
 
+## Latest progress
+
+Now able to render the tiles.
+
+Note: The ball and the paddle are still not involved yet, so the game rules below are actually the PLANNING.
+
 ## Game rules
 
 In the game, you have a ball and a paddle, and there are some bricks on the top of the screen. The ball will rebounce if it collides with a brick, the edge or the paddle. Also if the ball collides with a brick, the brick will be destroyed (if it's non-solid).
@@ -9,6 +15,12 @@ In the game, you have a ball and a paddle, and there are some bricks on the top 
 Your target is to destroy all non-solid (breakable) bricks. Once they are all destroyed, you win.
 
 You also have a certain number of lives (usually 3). Every time you failed to catch the ball, you lose a life. Once all the lives are lost, you lose, and restarting the game is required if you want to continue to play.
+
+### Controls
+
+AD to move the paddle in the horizontal direction.
+Space to launch the ball.
+Escape to quit.
 
 ## Download
 
