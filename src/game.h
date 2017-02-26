@@ -4,6 +4,7 @@
 #include <glfw3.h>
 #include "resource_manager.h"
 #include "renderer.h"
+#include "level.h"
 
 class Game
 {
@@ -27,10 +28,12 @@ private:
 	void loadTextures();
 	void update();
 	void render();
+	void renderBackground();
 
 	GLFWwindow * window;
 	ResourceManager resources;
 	Renderer renderer;
+	Level level;
 
 	static Game * game;
 };

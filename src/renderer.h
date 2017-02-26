@@ -17,11 +17,13 @@ public:
 
 	void setSize(const vec2 & s);
 	void setTexture(const string & tex);
+	void setColor(const vec3 & c);
 	void render(const vec2 & pos);
 
 private:
 	GLuint vao;
 	vec2 size;
 	string texture;
+	vec3 color;
 	ResourceManager * resources;
 };

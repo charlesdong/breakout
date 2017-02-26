@@ -61,6 +61,11 @@ void Renderer::setTexture(const string & tex)
 	texture = tex;
 }
 
+void Renderer::setColor(const vec3 & c)
+{
+	color = c;
+}
+
 void Renderer::render(const vec2 & pos)
 {
 	mat4 model;
@@ -72,11 +77,12 @@ void Renderer::render(const vec2 & pos)
 
 	shader.use();
 	shader.set4x4f("model", model);
+	shader.set3f("color", color);
 	tex.bind();
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 
-	tex.unbind();
+	Texture::unbind();
 }
