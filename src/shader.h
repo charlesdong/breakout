@@ -13,7 +13,6 @@ using std::string;
 class Shader
 {
 public:
-	//Shader(const char * vFile, const char * fFile);
 	Shader();
 
 	GLuint get() const;

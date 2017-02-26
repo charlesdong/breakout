@@ -23,6 +23,8 @@ public:
 	static Game & getApp();
 
 private:
+	void loadShaders();
+	void loadTextures();
 	void update();
 	void render();
 

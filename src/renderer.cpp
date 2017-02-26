@@ -40,9 +40,10 @@ void Renderer::init()
 
 	glBindVertexArray(0);
 
-	shader = &Game::getApp().getResources().getShader("shader");
-	shader->use();
-	shader->set4x4f("projection", ortho(0.0f, 800.0f, 600.0f, 0.0f));
+	resources = &Game::getApp().getResources();
+	Shader & shader = resources->getShader("shader");
+	shader.use();
+	shader.set4x4f("projection", ortho(0.0f, 800.0f, 600.0f, 0.0f));
 }
 
 void Renderer::clear()
@@ -55,17 +56,27 @@ void Renderer::setSize(const vec2 & s)
 	size = s;
 }
 
+void Renderer::setTexture(const string & tex)
+{
+	texture = tex;
+}
+
 void Renderer::render(const vec2 & pos)
 {
 	mat4 model;
+	Shader & shader = resources->getShader("shader");
+	Texture & tex = resources->getTexture(texture);
 
 	model = translate(model, vec3(pos, 0.0f));
 	model = scale(model, vec3(size, 1.0f));
 
-	shader->use();
-	shader->set4x4f("model", model);
+	shader.use();
+	shader.set4x4f("model", model);
+	tex.bind();
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
+
+	tex.unbind();
 }

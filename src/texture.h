@@ -5,14 +5,16 @@
 class Texture
 {
 public:
-	Texture(const char * file);
+	Texture();
 
 	GLuint get() const;
 	void bind() const;
 
+	void create(const char * file);
 	void clear();
 
-private:
+	static void unbind();
 
+private:
 	GLuint id;
 };

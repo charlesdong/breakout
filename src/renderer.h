@@ -1,8 +1,10 @@
 #pragma once
 
-#include "shader.h"
+#include "resource_manager.h"
+#include <string>
 #include <glew.h>
 #include <glm/glm.hpp>
+using std::string;
 using glm::vec2;
 
 class Renderer
@@ -14,11 +16,12 @@ public:
 	void clear();
 
 	void setSize(const vec2 & s);
-
+	void setTexture(const string & tex);
 	void render(const vec2 & pos);
 
 private:
 	GLuint vao;
 	vec2 size;
-	Shader * shader;
+	string texture;
+	ResourceManager * resources;
 };

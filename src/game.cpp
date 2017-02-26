@@ -54,14 +54,13 @@ void Game::init()
 		std::cout << "Failed to init GLEW\n";
 		exit(1);
 	}
-	glGetError();	// After initializing GLEW there may be an error, get rid of it
+	glGetError();	// After GLEW is initialized there's an underlying error, get rid of it
 
 	glViewport(0, 0, 800, 600);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	resources.loadShader("res/shaders/shader.vert", "res/shaders/shader.frag", "shader");
 	renderer.init();
 }
 
@@ -77,6 +76,15 @@ void Game::run()
 
 		glfwSwapBuffers(window);
 	}
+}
+
+void Game::loadShaders()
+{
+	resources.loadShader("res/shaders/shader.vert", "res/shaders/shader.frag", "shader");
+}
+
+void Game::loadTextures()
+{
 }
 
 void Game::update()
