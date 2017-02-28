@@ -4,9 +4,9 @@ Breakout is a classic 2D game released in 1976 (or 1978) on the Atari 2600 conso
 
 ## Latest progress
 
-Now able to render the tiles.
+Now able to move the paddle.
 
-Note: The ball and the paddle are still not involved yet, so the game rules below are actually the PLANNING.
+Note: The ball is still not involved yet, so part of the game rules below are actually the PLANNING.
 
 ## Game rules
 
