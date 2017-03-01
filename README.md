@@ -19,7 +19,9 @@ You also have a certain number of lives (usually 3). Every time you failed to ca
 ### Controls
 
 AD to move the paddle in the horizontal direction.
+
 Space to launch the ball.
+
 Escape to quit.
 
 ## Download
