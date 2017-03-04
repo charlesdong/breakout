@@ -60,6 +60,8 @@ void Ball::update(float dt, Level & level, Paddle & paddle)
 			velocity.x = INITIAL_VELOCITY.x * ratio * STRENGTH;
 			velocity.y = -abs(velocity.y);
 			velocity = glm::normalize(velocity) * length;
+
+			Game::getApp().playSound("res/audio/paddle.wav");
 		}
 		// Drop out of the bottom edge?
 		if (position.y > 600.0f)

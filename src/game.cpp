@@ -12,6 +12,7 @@ Game::Game() : window(nullptr), lives(3)
 Game::~Game()
 {
 	glfwTerminate();
+	soundEngine->drop();
 }
 
 ResourceManager & Game::getResources()
@@ -22,6 +23,11 @@ ResourceManager & Game::getResources()
 Renderer & Game::getRenderer()
 {
 	return renderer;
+}
+
+void Game::playSound(const char * file, bool looped)
+{
+	soundEngine->play2D(file, looped);
 }
 
 int & Game::getLives()
@@ -80,6 +86,9 @@ void Game::init()
 	level.init();
 	paddle.init();
 	ball.init();
+	soundEngine = irrklang::createIrrKlangDevice();
+
+	playSound("res/audio/main.mp3", true);
 }
 
 void Game::run()

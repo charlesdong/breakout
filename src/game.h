@@ -8,6 +8,7 @@
 #include "level.h"
 #include "paddle.h"
 #include "ball.h"
+#include <irrklang/irrKlang.h>
 
 class Game
 {
@@ -24,6 +25,7 @@ public:
 	ResourceManager & getResources();
 	Renderer & getRenderer();
 	int & getLives();
+	void playSound(const char * file, bool looped = false);
 
 	static Game & getApp();
 
@@ -43,7 +45,8 @@ private:
 	Level level;
 	Paddle paddle;
 	Ball ball;
+	irrklang::ISoundEngine * soundEngine;
 	int lives;
-
+	
 	static Game * game;
 };

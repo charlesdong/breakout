@@ -8,6 +8,8 @@ using std::floor;
 using std::ceil;
 using glm::dot;
 
+#include <iostream>
+
 Level::Level() : bricks(nullptr)
 {
 }
@@ -94,6 +96,12 @@ Direction Level::checkCollision(const vec2 & pos)
 				{
 					getBrick(x, y) = 0;
 					left--;
+					Game::getApp().playSound("res/audio/brick.mp3");
+				}
+				else
+				{
+					Game::getApp().playSound("res/audio/brick_solid.wav");
+					std::cout << "solid\n";
 				}
 			}
 
