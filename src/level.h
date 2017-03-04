@@ -26,6 +26,7 @@ public:
 	void init();
 
 	void update();
+	void reset();
 	Direction checkCollision(const vec2 & pos);
 	void render() const;
 
@@ -33,9 +34,11 @@ private:
 	const vec3 & getColor(brick_t id) const;
 	brick_t & getBrick(int w, int h) const;
 
-	int width, height;
-	int left;
-	vec2 brickSize;
-	brick_t * bricks;
+	static Direction getDirection(const vec2 & v);
+
+	int width, height;		// Level width and height
+	int left;				// Number of breakable bricks left
+	vec2 brickSize;			// Size of a single brick
+	brick_t * bricks;		// Array of bricks
 	Renderer * renderer;
 };

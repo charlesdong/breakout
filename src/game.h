@@ -23,6 +23,7 @@ public:
 
 	ResourceManager & getResources();
 	Renderer & getRenderer();
+	int & getLives();
 
 	static Game & getApp();
 
@@ -42,6 +43,7 @@ private:
 	Level level;
 	Paddle paddle;
 	Ball ball;
+	int lives;
 
 	static Game * game;
 };

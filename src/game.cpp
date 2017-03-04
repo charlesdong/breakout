@@ -5,7 +5,7 @@
 
 Game * Game::game;
 
-Game::Game() : window(nullptr)
+Game::Game() : window(nullptr), lives(3)
 {
 }
 
@@ -22,6 +22,11 @@ ResourceManager & Game::getResources()
 Renderer & Game::getRenderer()
 {
 	return renderer;
+}
+
+int & Game::getLives()
+{
+	return lives;
 }
 
 void Game::init()

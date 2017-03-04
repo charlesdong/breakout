@@ -11,6 +11,7 @@ public:
 
 	void init();
 	void move(float dt, int direction);
+	void reset();
 	void render();
 
 	float getX() const;

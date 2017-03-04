@@ -25,6 +25,12 @@ void Paddle::move(float dt, int direction)
 		posX = 0.0f;
 }
 
+void Paddle::reset()
+{
+	size = vec2(100.0f, 20.0f);
+	posX = (800.0f - size.x) / 2.0f;
+}
+
 void Paddle::render()
 {
 	renderer->setSize(size);

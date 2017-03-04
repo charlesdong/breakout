@@ -13,7 +13,8 @@ public:
 
 	void init();
 	void launch();
-	void update(float dt, Level & level, const Paddle & paddle);
+	void update(float dt, Level & level, Paddle & paddle);
+	void reset(const Paddle & paddle);
 	void render();
 
 	static const float RADIUS;
