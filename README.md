@@ -1,12 +1,10 @@
 # Breakout
 
-Breakout is a classic 2D game released in 1976 (or 1978) on the Atari 2600 console. And this is a Breakout clone.
+Breakout is a classic 2D game released in 1976 on the Atari 2600 console. And this is a Breakout clone.
 
 ## Latest progress
 
-Now able to move the paddle.
-
-Note: The ball is still not involved yet, so part of the game rules below are actually the PLANNING.
+Now able to play sounds. In the game, 4 sounds are played. One is the main sound of Breakout which is looped during the whole time. Others are only played when specific events take place (e.g. the ball bounces the paddle, a brick is destroyed).
 
 ## Game rules
 
