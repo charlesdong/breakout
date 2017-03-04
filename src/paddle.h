@@ -13,6 +13,9 @@ public:
 	void move(float dt, int direction);
 	void render();
 
+	float getX() const;
+	const vec2 & getSize() const;
+	
 private:
 	float posX;
 	vec2 size;

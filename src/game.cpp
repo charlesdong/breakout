@@ -3,8 +3,6 @@
 #include <iostream>		// TODO: logging
 #include <cstdlib>		// for exit()
 
-void onKey(GLFWwindow * window, int key, int scancode, int action, int mods);
-
 Game * Game::game;
 
 Game::Game() : window(nullptr)
@@ -53,9 +51,6 @@ void Game::init()
 	}
 	glfwMakeContextCurrent(window);
 
-	// Set callbacks
-	glfwSetKeyCallback(window, onKey);
-
 	// Init GLEW
 	glewExperimental = GL_TRUE;
 	if (glewInit())
@@ -79,14 +74,23 @@ void Game::init()
 	renderer.init();
 	level.init();
 	paddle.init();
+	ball.init();
 }
 
 void Game::run()
 {
 	while (!glfwWindowShouldClose(window))
 	{
+		static float preTime = 0.0f, curTime = 0.0f;
+
+		// Calculate the deltaTime value
+		preTime = curTime;
+		curTime = (float)glfwGetTime();
+		deltaTime = curTime - preTime;
+
 		glfwPollEvents();
 
+		processInput();
 		update();
 
 		render();
@@ -106,23 +110,27 @@ void Game::loadTextures()
 	resources.loadTexture("res/textures/brick_solid.png", "brick_solid");
 	resources.loadTexture("res/textures/brick.png", "brick");
 	resources.loadTexture("res/textures/paddle.png", "paddle");
+	resources.loadTexture("res/textures/ball.png", "ball");
+}
+
+void Game::processInput()
+{
+	if (isKeyDown(GLFW_KEY_ESCAPE))
+		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	if (isKeyDown(GLFW_KEY_A))
+		paddle.move(deltaTime, -1);
+	else if (isKeyDown(GLFW_KEY_D))
+		paddle.move(deltaTime, 1);
+
+	if (isKeyDown(GLFW_KEY_SPACE))
+		ball.launch();
 }
 
 void Game::update()
 {
-	static float preTime = 0.0f;
-	static float curTime = 0.0f;
-
-	preTime = curTime;
-	curTime = (float)glfwGetTime();
-	float dt = curTime - preTime;
-
 	level.update();
-
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		paddle.move(dt, -1);
-	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		paddle.move(dt, 1);
+	ball.update(deltaTime, level, paddle);
 }
 
 void Game::render()
@@ -132,6 +140,7 @@ void Game::render()
 	renderBackground();
 	level.render();
 	paddle.render();
+	ball.render();
 }
 
 void Game::renderBackground()
@@ -142,11 +151,12 @@ void Game::renderBackground()
 	renderer.render(vec2(0.0f, 0.0f));
 }
 
+bool Game::isKeyDown(int key) const
+{
+	return glfwGetKey(window, key) == GLFW_PRESS;
+}
+
 Game & Game::getApp()
 {
 	return *game;
-}
-
-void onKey(GLFWwindow * window, int key, int scancode, int action, int mods)
-{
 }

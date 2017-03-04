@@ -8,6 +8,15 @@ using glm::vec3;
 // The brick ID type
 typedef char brick_t;
 
+enum Direction
+{
+	NULLDIR,
+	RIGHT,
+	UP,
+	LEFT,
+	DOWN
+};
+
 class Level
 {
 public:
@@ -17,6 +26,7 @@ public:
 	void init();
 
 	void update();
+	Direction checkCollision(const vec2 & pos);
 	void render() const;
 
 private:
@@ -24,6 +34,7 @@ private:
 	brick_t & getBrick(int w, int h) const;
 
 	int width, height;
+	int left;
 	vec2 brickSize;
 	brick_t * bricks;
 	Renderer * renderer;

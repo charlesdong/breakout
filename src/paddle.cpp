@@ -32,3 +32,13 @@ void Paddle::render()
 	renderer->setTexture("paddle");
 	renderer->render(vec2(posX, 600.0f - size.y));
 }
+
+float Paddle::getX() const
+{
+	return posX;
+}
+
+const vec2 & Paddle::getSize() const
+{
+	return size;
+}

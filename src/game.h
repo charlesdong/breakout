@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "level.h"
 #include "paddle.h"
+#include "ball.h"
 
 class Game
 {
@@ -28,15 +29,19 @@ public:
 private:
 	void loadShaders();
 	void loadTextures();
+	void processInput();
 	void update();
 	void render();
 	void renderBackground();
+	bool isKeyDown(int key) const;
 
+	float deltaTime;
 	GLFWwindow * window;
 	ResourceManager resources;
 	Renderer renderer;
 	Level level;
 	Paddle paddle;
+	Ball ball;
 
 	static Game * game;
 };

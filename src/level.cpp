@@ -1,7 +1,11 @@
 #include "level.h"
+#include "ball.h"
 #include "game.h"
 #include <fstream>
+#include <cmath>
 using std::ifstream;
+using std::floor;
+using std::ceil;
 
 Level::Level() : bricks(nullptr)
 {
@@ -28,6 +32,8 @@ void Level::init()
 	{
 		fin >> temp;
 		bricks[i] = brick_t(temp);
+		if (temp != 0 && temp != 1)
+			left++;
 	}
 
 	fin.close();
@@ -35,6 +41,31 @@ void Level::init()
 
 void Level::update()
 {
+}
+
+Direction Level::checkCollision(const vec2 & pos)
+{
+	// The brick coordinates (of the upper-left corner) of the upper-left and the lower-right brick.
+	int ux, uy, dx, dy;
+	Direction result = NULLDIR;
+
+	// Remember to subtract 1 from dx and dy, 
+	// or they'll represent the LOWER-RIGHT corner of the lower-right brick).
+	ux = (int)floor(pos.x / brickSize.x);
+	uy = (int)floor(pos.y / brickSize.y);
+	dx = (int)ceil((pos.x + Ball::RADIUS * 2.0f) / brickSize.x) - 1;
+	dy = (int)ceil((pos.y + Ball::RADIUS * 2.0f) / brickSize.y) - 1;
+
+	// Check every brick in the range and destroy them (if the condition is satisfied).
+	for (int x = ux; x <= dx; x++)
+		for (int y = uy; y <= dy; y++)
+			if (x >= 0 && x < width && y >= 0 && y < height && getBrick(x, y) != 0 && getBrick(x, y) != 1)
+			{
+				getBrick(x, y) = 0;
+				left--;
+			}
+
+	return result;
 }
 
 void Level::render() const
